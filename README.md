@@ -81,7 +81,3 @@ streamlit run app.py
 * Job recommendation system
 * Resume keyword visualization
 * Downloadable analysis reports
-
-## 👨‍💻 Author
-
-**Akash S Ari**
