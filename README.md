@@ -74,6 +74,3 @@ ResumeSense is an AI-powered resume analysis tool that evaluates resumes against
 - Files are processed only for the current session and are not stored
 - Match scoring is designed to be strict and realistic rather than generous — a generic, untailored resume should score low even for a technically qualified candidate
 
-## License
-
-MIT
