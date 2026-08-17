@@ -1,83 +1,79 @@
-# 📄 ATS Resume Expert — AI Resume Analyzer
+# ResumeSense – Multi-Perspective ATS Analyzer
 
-An AI-powered **ATS Resume Analysis application** that compares a resume with a job description using **Google Gemini** and provides recruiter-style feedback, skill-gap analysis, missing keywords, and a resume-to-job match score.
+ResumeSense is an AI-powered resume analysis tool that evaluates resumes against job descriptions using Google Gemini's vision capabilities. Instead of relying on error-prone text extraction, it converts resumes directly into image input for the LLM, preserving layout and formatting context during analysis.
 
-## 🚀 Features
+## Features
 
-* 📄 Upload resume in PDF format
-* 📝 Enter a target job description
-* 🧑‍💼 AI-powered resume analysis
-* 📈 Identify skill gaps and improvement areas
-* 🔍 Find missing ATS keywords
-* 🎯 Calculate resume-to-job match percentage
-* 🎨 Interactive Streamlit interface
-* 🤖 Google Gemini-powered analysis
+- **Multi-mode analysis** — four distinct evaluation modes in a single app:
+  - 🧑‍💼 **Tell Me About the Resume** — recruiter-style overview of candidate profile, strengths, and notable projects
+  - 📈 **How Can I Improvise My Skills** — career-coach feedback identifying underdeveloped skills and actionable growth steps
+  - 🔍 **What Are the Keywords That Are Missing** — ATS-optimization scan comparing resume against a job description for missing hard/soft skills
+  - 🎯 **Percentage Match** — weighted JD-match score (skills 40%, experience 20%, keyword overlap 25%, domain relevance 15%)
+- **Vision-based parsing** — resumes are converted to images and analyzed directly by Gemini, avoiding the formatting/parsing errors common with text-extraction-based ATS tools
+- **Specialized prompt engineering** — each mode uses a purpose-built prompt template tuned to a specific evaluation behavior
+- **Polished UI** — custom-styled Streamlit interface with sidebar guidance, gradient hero header, and animated result cards
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-* **Python**
-* **Streamlit**
-* **Google Gemini (`gemini-3.5-flash`)**
-* **PyPDF2 / PDF processing**
-* **pdf2image**
-* **Pillow**
-* **python-dotenv**
+- **Language:** Python
+- **Frontend:** Streamlit
+- **LLM:** Google Gemini (Vision) via `google-generativeai`
+- **PDF Processing:** `pdf2image`, `Pillow (PIL)`
+- **Environment Management:** `python-dotenv`
 
-## 🔄 Workflow
+## How It Works
 
-```text
-Resume PDF + Job Description
-            ↓
-       PDF → Image
-            ↓
-       Gemini Vision
-            ↓
-    AI Resume Analysis
-            ↓
- ┌──────────┼──────────┐
- ↓          ↓          ↓
-Resume    Skill      Missing
-Review    Gaps      Keywords
-            ↓
-       Match Score
-```
+1. User pastes a job description and uploads a resume (PDF)
+2. The first page of the resume is converted to a JPEG image and base64-encoded
+3. User selects one of four analysis modes
+4. The corresponding prompt + resume image are sent to Gemini
+5. Gemini's response is rendered in a styled result card
 
-## 📊 Analysis Options
+## Setup
 
-The application provides four analysis modes:
+1. Clone the repository
+   ```bash
+   git clone <repo-url>
+   cd resumesense
+   ```
 
-1. **Resume Overview** — Recruiter-style resume analysis
-2. **Skill Improvement** — Identifies existing and missing skills
-3. **Missing Keywords** — Finds relevant ATS keywords absent from the resume
-4. **Percentage Match** — Calculates resume-to-job-description match
+2. Install dependencies
+   ```bash
+   pip install streamlit google-generativeai pdf2image pillow python-dotenv
+   ```
 
-These four actions are directly implemented in the application UI.
+3. Install `poppler` (required by `pdf2image`)
+   - **Windows:** download poppler binaries and add to PATH
+   - **macOS:** `brew install poppler`
+   - **Linux:** `sudo apt-get install poppler-utils`
 
-## ⚙️ Installation
+4. Add your Gemini API key to a `.env` file
+   ```
+   GOOGLE_API_KEY=your_api_key_here
+   ```
 
-```bash
-git clone <YOUR_REPOSITORY_URL>
-cd ATS-Resume-Expert
-pip install -r requirements.txt
-```
+5. Run the app
+   ```bash
+   streamlit run app.py
+   ```
 
-Create a `.env` file:
+## Usage
 
-```env
-GOOGLE_API_KEY=your_api_key
-```
+1. Paste the target job description into the text area
+2. Upload your resume as a PDF
+3. Choose an analysis mode:
+   - Resume overview
+   - Skill-gap coaching
+   - Missing keywords
+   - Percentage match
+4. Review the AI-generated report
 
-## ▶️ Run
+## Notes
 
-```bash
-streamlit run app.py
-```
+- Only the first page of the uploaded PDF is analyzed
+- Files are processed only for the current session and are not stored
+- Match scoring is designed to be strict and realistic rather than generous — a generic, untailored resume should score low even for a technically qualified candidate
 
-## 🔮 Future Improvements
+## License
 
-* Resume scoring dashboard
-* Resume improvement suggestions
-* Multiple resume comparison
-* Job recommendation system
-* Resume keyword visualization
-* Downloadable analysis reports
+MIT
