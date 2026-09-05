@@ -2,12 +2,6 @@
 
 ResumeSense is an AI-powered resume analysis tool that evaluates resumes against job descriptions using **Google Gemini's vision capabilities**. Instead of relying on error-prone text extraction, it converts resumes directly into image input for the LLM, preserving layout and formatting context during analysis.
 
-## 🚀 Live Demo
-
-**[Try ResumeSense Live](YOUR_STREAMLIT_LIVE_URL_HERE)**
-
-> Replace `YOUR_STREAMLIT_LIVE_URL_HERE` with your deployed Streamlit URL, for example:
-> `https://resumesense.streamlit.app`
 
 ## ✨ Features
 
